@@ -16,11 +16,16 @@ int main(void) {
     char t2 = getchar();
     char t3 = getchar();
     char t4 = getchar();
-    
+
     putchar(t1);
     putchar(t2);
     putchar(t3);
     putchar(t4);
+
+    if (q1 == t1) puts("合っています");
+    if (q2 == t2) puts("合っています");
+    if (q3 == t3) puts("合っています");
+    if (q4 == t4) puts("合っています");
 
     return EXIT_SUCCESS;
 }
