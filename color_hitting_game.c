@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void discard_input(void){
+    for(;getchar()!='\n';){
+        /* do nothing */
+    }
+}
+
 int main(void) {
     char q1 = 'R';
     char q2 = 'G';
@@ -17,6 +23,7 @@ int main(void) {
         char t2 = getchar();
         char t3 = getchar();
         char t4 = getchar();
+        discard_input();
 
         putchar(t1);
         putchar(t2);
