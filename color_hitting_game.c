@@ -1,8 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void discard_input(void){
-    for(;getchar()!='\n';){
+char get_trial_char(void) {
+    char ch;
+    for (;;) {
+        ch = getchar();
+        if (ch == 'R') { return ch; }
+        if (ch == 'G') { return ch; }
+        if (ch == 'B') { return ch; }
+        if (ch == 'Y') { return ch; }
+        if (ch == 'M') { return ch; }
+        if (ch == 'C') { return ch; }
+    }
+    return ch;
+}
+
+void discard_input(void) {
+    for (; getchar() != '\n';) {
         /* do nothing */
     }
 }
@@ -19,10 +33,10 @@ int main(void) {
     for (int i = 0; i < 10; i++) {
         printf("予想を入力してください。%d 回目\n", i + 1);
 
-        char t1 = getchar();
-        char t2 = getchar();
-        char t3 = getchar();
-        char t4 = getchar();
+        char t1 = get_trial_char();
+        char t2 = get_trial_char();
+        char t3 = get_trial_char();
+        char t4 = get_trial_char();
         discard_input();
 
         putchar(t1);
