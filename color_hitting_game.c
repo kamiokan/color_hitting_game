@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define QSIZSE (4)
+
 char get_trial_char(void) {
     char ch;
     for (;;) {
@@ -17,6 +19,8 @@ void discard_input(void) {
 }
 
 int main(void) {
+    int player_win = 0;
+
     char q1 = 'R';
     char q2 = 'G';
     char q3 = 'B';
@@ -46,6 +50,15 @@ int main(void) {
         if (q4 == t4) matched++;
         puts("結果発表");
         printf("%d 個合ってます！\n", matched);
+        if (matched == QSIZSE) {
+            player_win = 1;
+            break;
+        }
+    }
+    if (player_win) {
+        puts("あなたの勝ちです。");
+    } else {
+        puts("残念！出題者の勝ちです。");
     }
     return EXIT_SUCCESS;
 }
