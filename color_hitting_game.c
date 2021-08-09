@@ -18,7 +18,7 @@ void discard_input(void) {
     }
 }
 
-int main(void) {
+void color_hitting_game(void){
     int player_win = 0;
 
     char q1 = 'R';
@@ -60,5 +60,10 @@ int main(void) {
     } else {
         puts("残念！出題者の勝ちです。");
     }
+    return;
+}
+
+int main(void) {
+    color_hitting_game();
     return EXIT_SUCCESS;
 }
