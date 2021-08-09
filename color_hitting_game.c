@@ -5,12 +5,7 @@ char get_trial_char(void) {
     char ch;
     for (;;) {
         ch = getchar();
-        if (ch == 'R') { return ch; }
-        if (ch == 'G') { return ch; }
-        if (ch == 'B') { return ch; }
-        if (ch == 'Y') { return ch; }
-        if (ch == 'M') { return ch; }
-        if (ch == 'C') { return ch; }
+        if (ch == 'R' || ch == 'G' || ch == 'B' || ch == 'Y' || ch == 'M' || ch == 'C') { return ch; }
     }
     return ch;
 }
