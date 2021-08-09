@@ -30,11 +30,6 @@ int main(void) {
         putchar(t3);
         putchar(t4);
 
-        if (q1 == t1) puts("合っています");
-        if (q2 == t2) puts("合っています");
-        if (q3 == t3) puts("合っています");
-        if (q4 == t4) puts("合っています");
-
         int matched = 0;
         if (q1 == t1) matched++;
         if (q2 == t2) matched++;
