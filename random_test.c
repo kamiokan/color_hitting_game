@@ -6,7 +6,8 @@ int main(void) {
     int i;
     srand((unsigned) time(NULL));
     for (i = 0; i < 10; i++) {
-        printf("%d\n", rand());
+        int j = rand() % 6;
+        printf("%d\n", j);
     }
     return EXIT_SUCCESS;
 }
