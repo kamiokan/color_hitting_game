@@ -36,21 +36,22 @@ void chg_make_question(void) {
 int chg_play_turn(void) {
     int matched = 0;
 
-    char t1 = get_trial_char();
-    char t2 = get_trial_char();
-    char t3 = get_trial_char();
-    char t4 = get_trial_char();
+    char tx[QSIZSE];
+    tx[0] = get_trial_char();
+    tx[1] = get_trial_char();
+    tx[2] = get_trial_char();
+    tx[3] = get_trial_char();
     discard_input();
 
-    putchar(t1);
-    putchar(t2);
-    putchar(t3);
-    putchar(t4);
+    putchar(tx[0]);
+    putchar(tx[1]);
+    putchar(tx[2]);
+    putchar(tx[3]);
 
-    if (qx[0] == t1) matched++;
-    if (qx[1] == t2) matched++;
-    if (qx[2] == t3) matched++;
-    if (qx[3] == t4) matched++;
+    if (qx[0] == tx[0]) matched++;
+    if (qx[1] == tx[1]) matched++;
+    if (qx[2] == tx[2]) matched++;
+    if (qx[3] == tx[3]) matched++;
 
     return matched;
 }
