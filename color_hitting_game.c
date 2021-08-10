@@ -37,21 +37,18 @@ int chg_play_turn(void) {
     int matched = 0;
 
     char tx[QSIZSE];
-    tx[0] = get_trial_char();
-    tx[1] = get_trial_char();
-    tx[2] = get_trial_char();
-    tx[3] = get_trial_char();
+    for (int i = 0; i < QSIZSE; i++) {
+        tx[i] = get_trial_char();
+    }
     discard_input();
 
-    putchar(tx[0]);
-    putchar(tx[1]);
-    putchar(tx[2]);
-    putchar(tx[3]);
+    for (int i = 0; i < QSIZSE; i++) {
+        putchar(tx[i]);
+    }
 
-    if (qx[0] == tx[0]) matched++;
-    if (qx[1] == tx[1]) matched++;
-    if (qx[2] == tx[2]) matched++;
-    if (qx[3] == tx[3]) matched++;
+    for (int i = 0; i < QSIZSE; i++) {
+        if (qx[i] == tx[i]) matched++;
+    }
 
     return matched;
 }
