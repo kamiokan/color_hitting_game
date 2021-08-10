@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define QSIZSE (4)
 
@@ -74,6 +75,7 @@ void chg_display_win_or_lose(int player_win) {
 void color_hitting_game(void) {
     int player_win = 0;
 
+    srand((unsigned)time(NULL));
     chg_display_title();
     chg_make_question();
     const int max_turns = 10;
