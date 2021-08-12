@@ -25,19 +25,13 @@ void chg_display_title(void) {
 }
 
 static char qx[QSIZSE];
-static const int num_of_colors = 6;
+static const char qseeds[] = {'R', 'G', 'B', 'Y', 'M', 'C'};
+static const int num_of_colors = sizeof(qseeds) / sizeof(qseeds[0]);
 
 void chg_make_question(void) {
     for (int i = 0; i < QSIZSE; i++) {
         int qn = rand() % num_of_colors;
-        switch(qn){
-            case 0:qx[i] = 'R';break;
-            case 1:qx[i] = 'G';break;
-            case 2:qx[i] = 'B';break;
-            case 3:qx[i] = 'Y';break;
-            case 4:qx[i] = 'M';break;
-            case 5:qx[i] = 'C';break;
-        }
+        qx[i] = qseeds[qn];
     }
     puts("コンピュータが問題を出しました");
 }
