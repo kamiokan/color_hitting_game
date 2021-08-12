@@ -30,12 +30,14 @@ static const int num_of_colors = 6;
 void chg_make_question(void) {
     for (int i = 0; i < QSIZSE; i++) {
         int qn = rand() % num_of_colors;
-        if (qn == 0) { qx[i] = 'R'; }
-        else if (qn == 1) { qx[i] = 'G'; }
-        else if (qn == 2) { qx[i] = 'B'; }
-        else if (qn == 3) { qx[i] = 'Y'; }
-        else if (qn == 4) { qx[i] = 'M'; }
-        else if (qn == 5) { qx[i] = 'C'; }
+        switch(qn){
+            case 0:qx[i] = 'R';break;
+            case 1:qx[i] = 'G';break;
+            case 2:qx[i] = 'B';break;
+            case 3:qx[i] = 'Y';break;
+            case 4:qx[i] = 'M';break;
+            case 5:qx[i] = 'C';break;
+        }
     }
     puts("コンピュータが問題を出しました");
 }
