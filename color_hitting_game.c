@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define QSIZSE (4)
+#define QSIZE (4)
 
 char get_trial_char(void) {
     char ch;
@@ -24,32 +24,38 @@ void chg_display_title(void) {
     puts("ゲームを始めてください。");
 }
 
-static char qx[QSIZSE];
+static char qx[QSIZE];
 static const char qseeds[] = {'R', 'G', 'B', 'Y', 'M', 'C'};
 static const int num_of_colors = sizeof(qseeds) / sizeof(qseeds[0]);
 
 void chg_make_question(void) {
-    for (int i = 0; i < QSIZSE; i++) {
+    for (int i = 0; i < QSIZE; i++) {
         int qn = rand() % num_of_colors;
         qx[i] = qseeds[qn];
     }
     puts("コンピュータが問題を出しました");
+
+    /* 動作確認のためにしばらくは問題を表示する */
+    for (int i = 0; i < QSIZE; i++) {
+        putchar(qx[i]);
+    }
+    putchar('\n');
 }
 
 int chg_play_turn(void) {
     int matched = 0;
 
-    char tx[QSIZSE];
-    for (int i = 0; i < QSIZSE; i++) {
+    char tx[QSIZE];
+    for (int i = 0; i < QSIZE; i++) {
         tx[i] = get_trial_char();
     }
     discard_input();
 
-    for (int i = 0; i < QSIZSE; i++) {
+    for (int i = 0; i < QSIZE; i++) {
         putchar(tx[i]);
     }
 
-    for (int i = 0; i < QSIZSE; i++) {
+    for (int i = 0; i < QSIZE; i++) {
         if (qx[i] == tx[i]) matched++;
     }
 
@@ -59,7 +65,7 @@ int chg_play_turn(void) {
 int chg_check_result(int matched) {
     puts("結果発表");
     printf("%d 個合ってます！\n", matched);
-    if (matched == QSIZSE) {
+    if (matched == QSIZE) {
         return 1;
     } else {
         return 0;
