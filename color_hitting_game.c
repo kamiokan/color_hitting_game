@@ -25,12 +25,18 @@ void chg_display_title(void) {
 }
 
 static char qx[QSIZSE];
+static const int num_of_colors = 6;
 
 void chg_make_question(void) {
-    qx[0] = 'R';
-    qx[1] = 'G';
-    qx[2] = 'B';
-    qx[3] = 'Y';
+    for (int i = 0; i < QSIZSE; i++) {
+        int qn = rand() % num_of_colors;
+        if (qn == 0) { qx[i] = 'R'; }
+        else if (qn == 1) { qx[i] = 'G'; }
+        else if (qn == 2) { qx[i] = 'B'; }
+        else if (qn == 3) { qx[i] = 'Y'; }
+        else if (qn == 4) { qx[i] = 'M'; }
+        else if (qn == 5) { qx[i] = 'C'; }
+    }
     puts("コンピュータが問題を出しました");
 }
 
@@ -75,7 +81,7 @@ void chg_display_win_or_lose(int player_win) {
 void color_hitting_game(void) {
     int player_win = 0;
 
-    srand((unsigned)time(NULL));
+    srand((unsigned) time(NULL));
     chg_display_title();
     chg_make_question();
     const int max_turns = 10;
