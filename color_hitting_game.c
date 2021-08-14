@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 #define QSIZE (4)
@@ -30,18 +31,25 @@ void chg_display_title(void) {
     puts("ゲームを始めてください。");
 }
 
-void chg_make_question(void) {
-    for (int i = 0; i < QSIZE; i++) {
-        int qn = rand() % num_of_colors;
-        qx[i] = qseeds[qn];
-    }
-    puts("コンピュータが問題を出しました");
-
-    /* 動作確認のためにしばらくは問題を表示する */
+void chg_display_question(void) {
     for (int i = 0; i < QSIZE; i++) {
         putchar(qx[i]);
     }
     putchar('\n');
+}
+
+void chg_make_question(void) {
+    char wk_qseeds[num_of_colors];
+    memcpy(wk_qseeds, qseeds, sizeof(qseeds));
+    for (int i = 0, len = num_of_colors; i < QSIZE; i++, len--) {
+        unsigned int r = rand() % len;
+        qx[i] = wk_qseeds[r];
+        wk_qseeds[r] = wk_qseeds[len - 1];
+    }
+    puts("コンピュータが問題を出しました");
+
+    /* 動作確認のためにしばらくは問題を表示する */
+    chg_display_question();
 }
 
 int chg_play_turn(void) {
