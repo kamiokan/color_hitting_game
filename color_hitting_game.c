@@ -115,6 +115,14 @@ bool chg_input_length_is_valid(const char *buf) {
     return true;
 }
 
+bool chg_input_is_quit(const char *buf) {
+    if (toupper(buf[0]) == 'Q') {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 void chg_input_answer(char buf[], int size) {
     char *cr;
 
@@ -125,13 +133,35 @@ void chg_input_answer(char buf[], int size) {
     }
 }
 
-int chg_play_turn(void) {
-    int matched = 0;
+enum chg_game_state {
+    chg_state_PLAYING, chg_state_PLAYER_WIN, chg_state_PLAYER_LOSE
+};
 
+enum chg_game_state chg_check_result(const char tx[]) {
+    int matched = 0;
+    for (int i = 0; i < QSIZE; i++) {
+        if (qx[i] == toupper(tx[i])) {
+            matched += 1;
+        }
+    }
+    puts("結果発表");
+    printf("%d 個合ってます！\n", matched);
+    if (matched == QSIZE) {
+        return chg_state_PLAYER_WIN;
+    } else {
+        return chg_state_PLAYING;
+    }
+}
+
+enum chg_game_state chg_play_turn(void) {
     char tx[QSIZE + 10];
     const int size = sizeof(tx);
     while (true) {
         chg_input_answer(tx, size);
+
+        if (chg_input_is_quit(tx)) {
+            return chg_state_PLAYER_LOSE;
+        }
 
         if (chg_input_length_is_valid(tx)
             && chg_input_chars_is_valid(tx)
@@ -142,32 +172,20 @@ int chg_play_turn(void) {
         }
     }
 
-    for (int i = 0; i < QSIZE; i++) {
-        if (qx[i] == toupper(tx[i])) matched++;
-    }
-    return matched;
+    return chg_check_result(tx);
 }
 
-int chg_check_result(int matched) {
-    puts("結果発表");
-    printf("%d 個合ってます！\n", matched);
-    if (matched == QSIZE) {
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
-void chg_display_win_or_lose(int player_win) {
-    if (player_win) {
+void chg_display_win_or_lose(enum chg_game_state game_state) {
+    if (game_state == chg_state_PLAYER_WIN) {
         puts("あなたの勝ちです。");
     } else {
         puts("残念！出題者の勝ちです。");
     }
+    chg_display_question();
 }
 
 void color_hitting_game(void) {
-    int player_win = 0;
+    enum chg_game_state game_state = chg_state_PLAYING;
 
     srand((unsigned) time(NULL));
     chg_display_title();
@@ -176,16 +194,11 @@ void color_hitting_game(void) {
     for (int i = 0; i < max_turns; i++) {
         printf("予想を入力してください。%d 回目\n", i + 1);
 
-        int matched = 0;
-        matched = chg_play_turn();
-
-        player_win = chg_check_result(matched);
-        if (player_win) {
-            break;
-        }
+        game_state = chg_play_turn();
+        if (game_state == chg_state_PLAYER_WIN || game_state == chg_state_PLAYER_LOSE) { break; }
     }
 
-    chg_display_win_or_lose(player_win);
+    chg_display_win_or_lose(game_state);
     return;
 }
 
