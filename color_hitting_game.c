@@ -162,8 +162,15 @@ enum chg_game_state chg_check_result(const char tx[]) {
             }
         }
     }
-    puts("結果発表");
-    printf("%d ヒット, %d ブロー。\n", hit, blow);
+
+    for (int i = 0; i < hit; i++) {
+        chg_display_hit_pin();
+    }
+    for (int i = 0; i < blow; i++) {
+        chg_display_blow_pin();
+    }
+    putchar('\n');
+
     if (hit == QSIZE) {
         return chg_state_PLAYER_WIN;
     } else {
