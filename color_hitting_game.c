@@ -40,6 +40,17 @@ void chg_display_question(void) {
     putchar('\n');
 }
 
+const char *CHG_HIT_CHAR = "\033[30;47mH\033[0m";
+const char *CHG_BLOW_CHAR = "\033[37;40mB\033[0m";
+
+void chg_display_hit_pin(void) {
+    printf("%s ", CHG_HIT_CHAR);
+}
+
+void chg_display_blow_pin(void) {
+    printf("%s ", CHG_BLOW_CHAR);
+}
+
 void chg_make_question(void) {
     char wk_qseeds[num_of_colors];
     memcpy(wk_qseeds, qseeds, sizeof(qseeds));
