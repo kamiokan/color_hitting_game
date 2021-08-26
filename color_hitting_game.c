@@ -51,6 +51,42 @@ void chg_display_blow_pin(void) {
     printf("%s ", CHG_BLOW_CHAR);
 }
 
+const char *CHG_RED_MARK = "\033[41m R \33[0m";
+const char *CHG_GREEN_MARK = "\033[42m G \33[0m";
+const char *CHG_YELLOW_MARK = "\033[43m Y \33[0m";
+const char *CHG_BLUE_MARK = "\033[44m B \33[0m";
+const char *CHG_MAGENTA_MARK = "\033[45m M \33[0m";
+const char *CHG_CYAN_MARK = "\033[46m C \33[0m";
+const char *CHG_OTHER_MARK = "\033[47m _ \33[0m";
+
+const char *chg_color_to_mark(const char color) {
+    const char *mark;
+    switch (color) {
+        case 'R':
+            mark = CHG_RED_MARK;
+            break;
+        case 'G':
+            mark = CHG_GREEN_MARK;
+            break;
+        case 'Y':
+            mark = CHG_YELLOW_MARK;
+            break;
+        case 'B':
+            mark = CHG_BLUE_MARK;
+            break;
+        case 'M':
+            mark = CHG_MAGENTA_MARK;
+            break;
+        case 'C':
+            mark = CHG_CYAN_MARK;
+            break;
+        default:
+            mark = CHG_OTHER_MARK;
+            break;
+    }
+    return mark;
+}
+
 void chg_make_question(void) {
     char wk_qseeds[num_of_colors];
     memcpy(wk_qseeds, qseeds, sizeof(qseeds));
