@@ -87,6 +87,12 @@ const char *chg_color_to_mark(const char color) {
     return mark;
 }
 
+void chg_display_trial(const char tx[]) {
+    for (int i = 0; i < QSIZE; i++) {
+        printf("%s ", chg_color_to_mark(toupper(tx[i])));
+    }
+}
+
 void chg_make_question(void) {
     char wk_qseeds[num_of_colors];
     memcpy(wk_qseeds, qseeds, sizeof(qseeds));
@@ -232,7 +238,7 @@ enum chg_game_state chg_play_turn(void) {
             puts("再入力してください");
         }
     }
-
+    chg_display_trial(tx);
     return chg_check_result(tx);
 }
 
