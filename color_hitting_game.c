@@ -10,6 +10,14 @@ static char qx[QSIZE];
 
 static const char qseeds[] = {'R', 'G', 'B', 'Y', 'M', 'C'};
 static const int num_of_colors = sizeof(qseeds) / sizeof(qseeds[0]);
+static const int initial_score = 200;
+static const int winning_point = 100;
+static const int losing_point = -100;
+static int player_score;
+
+int chg_calc_option_point(const int turn) {
+    return 100 - (turn * 10);
+}
 
 char get_trial_char(void) {
     char ch;
@@ -43,7 +51,7 @@ void move_cursor(int row, int col) {
 void chg_display_title(void) {
     clear_screen(FULL_SCREEN);
     move_cursor(1, 1);
-    puts("【色当てゲーム】");
+    printf("【色当てゲーム】 score: %d\n", player_score);
     puts("ゲームを始めてください。");
 }
 
@@ -279,7 +287,8 @@ void color_hitting_game(void) {
     chg_display_title();
     chg_make_question();
     const int max_turns = 10;
-    for (int turn = 0; turn < max_turns; turn++) {
+    int turn;
+    for (turn = 0; turn < max_turns; turn++) {
         printf("予想を入力してください。\n%2d 回目>>", turn + 1);
 
         game_state = chg_play_turn(turn);
@@ -287,6 +296,12 @@ void color_hitting_game(void) {
     }
 
     chg_display_win_or_lose(game_state);
+    if (game_state == chg_state_PLAYER_WIN) {
+        player_score += winning_point;
+        player_score += chg_calc_option_point(turn);
+    } else {
+        player_score += losing_point;
+    }
     return;
 }
 
@@ -299,6 +314,7 @@ void chg_display_operation_menu(void) {
 void chg_select_operation(void) {
     char opx[4];
     const int size = sizeof(opx);
+    player_score = initial_score;
     while (true) {
         chg_display_title();
         chg_display_operation_menu();
