@@ -325,6 +325,10 @@ void chg_select_operation(void) {
             return;
         } else if (op == 'N') {
             color_hitting_game();
+            if (player_score <= 0) {
+                puts("ゲームオーバーです！！");
+                return;
+            }
         }
     }
 }
