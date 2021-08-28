@@ -287,7 +287,18 @@ void color_hitting_game(void) {
     return;
 }
 
+void chg_display_operation_menu(void) {
+    puts("(N) 新しいゲームを始める");
+    puts("(Q) 終了");
+    printf("操作を選んでください:");
+}
+
+void chg_select_operation(void) {
+    chg_display_title();
+    chg_display_operation_menu();
+}
+
 int main(void) {
-    color_hitting_game();
+    chg_select_operation();
     return EXIT_SUCCESS;
 }
